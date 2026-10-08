@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   direction: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
   speed: 10
-  acceleration: 0
+  acceleration: 5
+  collisionDistance: 0.5
+  asteroidTransforms: []
