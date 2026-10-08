@@ -5,8 +5,10 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public Transform enemyTransform;
-    public GameObject bombPrefab;
+    public GameObject bullet;
     public List<Transform> asteroidTransforms;
+
+    public GameObject spawnedBullet;
 
     public float maxSpeed = 10;
     public float acceleration = 5;
@@ -14,6 +16,9 @@ public class Player : MonoBehaviour
 
     public Vector2 velocity;
     public Vector2 cancelMomentum;
+
+    public Vector2 mousePos;
+    public Vector2 direction2Mouse;
 
     void Start()
     {
@@ -23,6 +28,26 @@ public class Player : MonoBehaviour
     void Update()
     {
         playerMovement();
+
+        shoot();
+
+    }
+
+    public void shoot()
+    {
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+            direction2Mouse = mousePos - (Vector2) transform.position;
+            direction2Mouse.Normalize();
+
+            spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            spawnedBullet.GetComponent<Bullet>().direction = direction2Mouse;
+            
+        }
+        Debug.DrawLine(direction2Mouse, Vector2.zero, Color.magenta);
+
     }
 
     public void playerMovement()
