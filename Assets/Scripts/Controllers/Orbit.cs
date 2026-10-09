@@ -1,12 +1,14 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class Orbit : MonoBehaviour
 {
     public GameObject centerOfMass;
-    public float orbitSpeed = 150;
     public float orbitDistance = 1;
-    public float orbitPercentage;
+
+    public List<GameObject> thingsOrbiting;
 
     void Start()
     {
@@ -16,14 +18,29 @@ public class Orbit : MonoBehaviour
 
     void Update()
     {
-        orbitPercentage += Time.deltaTime * orbitSpeed;
 
-        if (orbitPercentage >= 360)
+
+        //calculateOrbit();
+    }
+
+    public Vector2 calculateOrbit(float orbitPercentage)
+    {
+
+        float distanceX = math.cos(orbitPercentage * Mathf.Deg2Rad);
+        float distanceY = math.sin(orbitPercentage * Mathf.Deg2Rad);
+        Vector2 position = new Vector2(this.transform.position.x + distanceX * orbitDistance, this.transform.position.y + distanceY * orbitDistance);
+
+        return position;
+    }
+
+    public void addToList(GameObject bullet)
+    {
+        thingsOrbiting.Add(bullet);
+
+        for (int i = 0; i < thingsOrbiting.Count; ++i)
         {
-            orbitPercentage = 0;
+            float jumps = 360 / thingsOrbiting.Count;
+            thingsOrbiting[i].GetComponent<Bullet>().orbitPercentage = jumps * i;
         }
-
-        Vector2 position = new Vector2(centerOfMass.transform.position.x + math.cos(orbitPercentage * Mathf.Deg2Rad) * orbitDistance, centerOfMass.transform.position.y + math.sin(orbitPercentage * Mathf.Deg2Rad) * orbitDistance);
-        transform.position = position;
     }
 }

@@ -107,5 +107,13 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   speed: 10
   acceleration: 5
-  collisionDistance: 0.5
+  timer: 0
+  despawnTime: 3
+  collisionDistanceAsteroid: 0.2
+  collisionDistanceSun: 1
   asteroidTransforms: []
+  asteroidParent: {fileID: 0}
+  sun: {fileID: 0}
+  isOrbiting: 0
+  orbitPercentage: 0
+  orbitSpeed: 300
