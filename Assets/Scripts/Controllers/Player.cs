@@ -123,6 +123,6 @@ public class Player : MonoBehaviour
             shipSpriteRenderer.transform.eulerAngles = Vector3.zero;
         }
 
-        shipSpriteRenderer.transform.Rotate(0, 0, (3 - spinOutTimer)*spinAmount);
+        shipSpriteRenderer.transform.Rotate(0, 0, (spinOutMaxTimer - spinOutTimer)*spinAmount);
     }
 }
