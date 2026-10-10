@@ -12,13 +12,22 @@ public class Player : MonoBehaviour
 
     public float maxSpeed = 10;
     public float acceleration = 5;
-    public float deceleration = 5;
+    public float regularDeceleration = 5;
 
     public Vector2 velocity;
     public Vector2 cancelMomentum;
 
     public Vector2 mousePos;
     public Vector2 direction2Mouse;
+
+    public bool spinOut;
+    public float spinOutTimer;
+    public float spinAmount = 0.7f;
+    public float spinOutMaxTimer = 2;
+    public float spinOutDeceleration = 7;
+    public float bananaCollisionDistance = 0.3f;
+    public GameObject banana;
+    public GameObject shipSpriteRenderer;
 
     void Start()
     {
@@ -27,10 +36,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        playerMovement();
+        if (!spinOut)
+        {
+            playerMovement();
+        }
 
         shoot();
 
+        if (Vector2.Distance(transform.position, banana.transform.position) < bananaCollisionDistance || spinOut)//if the player comes in contact with the banana... 
+        {
+            slip();
+        }
     }
 
     public void shoot()
@@ -69,19 +85,44 @@ public class Player : MonoBehaviour
             velocity += acceleration * Time.deltaTime * Vector2.left;
         }
 
+        velocity = Vector2.ClampMagnitude(velocity, maxSpeed);//don't let the ship go too fast
+
         //if theres no movement inputs
         if (Keyboard.current.wKey.isPressed == false && Keyboard.current.aKey.isPressed == false && Keyboard.current.sKey.isPressed == false && Keyboard.current.dKey.isPressed == false)
         {
-            cancelMomentum = velocity.normalized;//normalize the velocity vector...
-
-            if (velocity != Vector2.zero)//... and if the ship is still moving... 
-            {
-                velocity -= cancelMomentum * Time.deltaTime * deceleration;//... substact the normalized velocity vector from the velocity vector
-            }
+            decelerate(regularDeceleration);
         }
 
-        velocity = Vector2.ClampMagnitude(velocity, maxSpeed);//don't let the ship go too fast
         transform.position += (Vector3)velocity * Time.deltaTime;//update ship position
 
+    }
+
+    public void decelerate(float deceleration)
+    {
+        cancelMomentum = velocity.normalized;//normalize the velocity vector...
+
+        if (velocity != Vector2.zero)//... and if the ship is still moving... 
+        {
+            velocity -= cancelMomentum * Time.deltaTime * deceleration;//... substact the normalized velocity vector from the velocity vector
+        }
+
+    }
+
+    public void slip()
+    {
+        spinOut = true;
+        spinOutTimer += Time.deltaTime;
+
+        decelerate(spinOutDeceleration);
+        transform.position += (Vector3)velocity * Time.deltaTime;//update ship position
+
+        if (spinOutTimer > spinOutMaxTimer)
+        {
+            spinOut = false;
+            spinOutTimer = 0;
+            shipSpriteRenderer.transform.eulerAngles = Vector3.zero;
+        }
+
+        shipSpriteRenderer.transform.Rotate(0, 0, (3 - spinOutTimer)*spinAmount);
     }
 }
