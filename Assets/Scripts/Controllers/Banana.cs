@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -7,6 +8,11 @@ public class Banana : MonoBehaviour
     public float speed = 5;
     public Vector3 direction;
     public Vector3 screenWorldSize;
+
+    public GameObject newBanana;
+    public GameObject bananaParticle;
+    public GameObject parent;
+
     void Start()
     {
         angle = UnityEngine.Random.Range(0, 360);
@@ -19,7 +25,7 @@ public class Banana : MonoBehaviour
 
         screenWorldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
-        Debug.Log(screenWorldSize);
+        parent = GameObject.Find("ThisIsBananas");
     }
 
     
@@ -30,18 +36,40 @@ public class Banana : MonoBehaviour
         if(transform.position.x > screenWorldSize.x)
         {
             direction.x *= -1;
+            bounce();
         }
         if(transform.position.x < -screenWorldSize.x)
         {
             direction.x *= -1;
+            bounce();
         }
         if (transform.position.y > screenWorldSize.y)
         {
             direction.y *= -1;
+            bounce();
         }
         if (transform.position.y < -screenWorldSize.y)
         {
             direction.y *= -1;
+            bounce();
         }
+    }
+    public void bounce()
+    {
+        StartCoroutine(waitForBananas());
+    }
+
+    IEnumerator waitForBananas()
+    {
+        yield return new WaitForSeconds(0.2f);
+        spawnBananas(-1);
+        spawnBananas(1);
+    }
+    public void spawnBananas(float side)
+    {
+        bananaParticle = Instantiate(newBanana, transform.position, Quaternion.identity);
+        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        bananaParticle.GetComponent<BananaParticle>().angle = angle + (30 * side);
     }
 }

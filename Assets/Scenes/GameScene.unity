@@ -369,6 +369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Banana (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4126331178702930311, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8460488066373311157, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.043783
@@ -425,6 +429,10 @@ PrefabInstance:
     - target: {fileID: 4126331178702930311, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
       propertyPath: m_Name
       value: Banana (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126331178702930311, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8460488066373311157, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
       propertyPath: m_LocalPosition.x
@@ -633,6 +641,10 @@ PrefabInstance:
     - target: {fileID: 4126331178702930311, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
       propertyPath: m_Name
       value: Banana (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126331178702930311, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8460488066373311157, guid: 0f1bf854e3aca714883c0d6d57deec27, type: 3}
       propertyPath: m_LocalPosition.x

@@ -104,7 +104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c9534d710d5d240bcc72f2861d522c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Banana
+  hereAtGameStart: 1
   angle: 0
   speed: 5
   direction: {x: 0, y: 0, z: 0}
   screenWorldSize: {x: 0, y: 0, z: 0}
+  newBanana: {fileID: 6947315634393506971, guid: bfb6b74424359484a8695b9f6b8d2b01, type: 3}
+  spawnedBanana: {fileID: 0}
+  parent: {fileID: 0}
+  timer: 0
+  maxTimer: 2
