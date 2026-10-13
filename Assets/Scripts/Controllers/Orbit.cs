@@ -25,7 +25,6 @@ public class Orbit : MonoBehaviour
 
     public Vector2 calculateOrbit(float orbitPercentage)
     {
-
         float distanceX = math.cos(orbitPercentage * Mathf.Deg2Rad);
         float distanceY = math.sin(orbitPercentage * Mathf.Deg2Rad);
         Vector2 position = new Vector2(this.transform.position.x + distanceX * orbitDistance, this.transform.position.y + distanceY * orbitDistance);

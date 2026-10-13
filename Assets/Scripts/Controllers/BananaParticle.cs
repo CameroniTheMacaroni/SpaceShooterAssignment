@@ -12,8 +12,9 @@ public class BananaParticle : MonoBehaviour
     public float maxTimer = 2f;
     void Start()
     {
-        screenWorldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        screenWorldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));//find the bounds of the screen
 
+        //calculate the direction of angle of the banana
         float directionX = math.cos(angle * Mathf.Deg2Rad);
         float directionY = math.sin(angle * Mathf.Deg2Rad);
 
@@ -24,8 +25,9 @@ public class BananaParticle : MonoBehaviour
 
     void Update()
     {
-        transform.position += speed * Time.deltaTime * direction;
+        transform.position += speed * Time.deltaTime * direction;//update position
 
+        //if the it hits the edge of the screen, bounce
         if (transform.position.x > screenWorldSize.x)
         {
             direction.x *= -1;
