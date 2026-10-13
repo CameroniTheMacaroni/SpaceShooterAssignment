@@ -51,13 +51,18 @@ public class Player : MonoBehaviour
 
         shoot();//test for if the player has shot
 
-        for (int i = 0; i < bananas.Count; i++)
-        {
-            if (Vector2.Distance(transform.position, bananas[i].transform.position) < bananaCollisionDistance || spinOut)//if the player comes in contact with the banana... 
+        if (!spinOut) { 
+            for (int i = 0; i < bananas.Count; i++)
             {
-                Debug.Log("slipping");
-                slip();
+                if (Vector2.Distance(transform.position, bananas[i].transform.position) < bananaCollisionDistance)//if the player comes in contact with the banana... 
+                {
+                    slip();
+                }
             }
+        }
+        else
+        {
+            slip();
         }
     }
 
@@ -190,6 +195,6 @@ public class Player : MonoBehaviour
             shipSpriteRenderer.transform.eulerAngles = Vector3.zero;
         }
 
-        shipSpriteRenderer.transform.Rotate(0, 0, (spinOutMaxTimer - spinOutTimer) * spinAmount * Time.deltaTime);//make the ship's sprite rotate
+        shipSpriteRenderer.transform.Rotate(0, 0, (spinOutMaxTimer - spinOutTimer) * spinAmount);//make the ship's sprite rotate
     }
 }
