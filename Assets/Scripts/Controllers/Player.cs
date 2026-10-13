@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public List<Transform> asteroidTransforms;
 
+    public GameObject bananasParent;
+    public List<GameObject> bananas;
+
     public GameObject spawnedBullet;
 
     public float maxSpeed = 10;
@@ -34,7 +37,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        updateBananaList();
     }
 
     void Update()
@@ -48,9 +51,21 @@ public class Player : MonoBehaviour
 
         shoot();//test for if the player has shot
 
-        if (Vector2.Distance(transform.position, banana.transform.position) < bananaCollisionDistance || spinOut)//if the player comes in contact with the banana... 
+        for (int i = 0; i < bananas.Count; i++)
         {
-            slip();
+            if (Vector2.Distance(transform.position, bananas[i].transform.position) < bananaCollisionDistance || spinOut)//if the player comes in contact with the banana... 
+            {
+                Debug.Log("slipping");
+                slip();
+            }
+        }
+    }
+
+    public void updateBananaList()
+    {
+        for (int i = 0; i < bananasParent.transform.childCount; i++)
+        {
+            bananas.Add(bananasParent.transform.GetChild(i).gameObject);
         }
     }
 
@@ -175,6 +190,6 @@ public class Player : MonoBehaviour
             shipSpriteRenderer.transform.eulerAngles = Vector3.zero;
         }
 
-        shipSpriteRenderer.transform.Rotate(0, 0, (spinOutMaxTimer - spinOutTimer)*spinAmount);//make the ship's sprite rotate
+        shipSpriteRenderer.transform.Rotate(0, 0, (spinOutMaxTimer - spinOutTimer) * spinAmount * Time.deltaTime);//make the ship's sprite rotate
     }
 }
