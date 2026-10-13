@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8460488066373311157}
   - component: {fileID: 4186540409982059439}
+  - component: {fileID: -1077661689584508173}
   m_Layer: 0
   m_Name: Banana
   m_TagString: Untagged
@@ -91,3 +92,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-1077661689584508173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126331178702930311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c9534d710d5d240bcc72f2861d522c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Banana
+  angle: 0
+  speed: 5
+  direction: {x: 0, y: 0, z: 0}
+  screenWorldSize: {x: 0, y: 0, z: 0}
